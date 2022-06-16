@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobil_final/AboutMe.dart';
+import 'package:mobil_final/pages/AboutMe.dart';
 
 class ReferencesPage extends StatefulWidget {
   const ReferencesPage({Key? key}) : super(key: key);

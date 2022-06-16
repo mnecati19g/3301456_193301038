@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobil_final/ContactPage.dart';
-import 'package:mobil_final/LoginPage.dart';
-import 'package:mobil_final/ReferencesPage.dart';
+import 'package:mobil_final/pages/ContactPage.dart';
+import 'package:mobil_final/pages/LoginPage.dart';
+import 'package:mobil_final/pages/ReferencesPage.dart';
 
 class AboutMe extends StatefulWidget {
   const AboutMe({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class AboutMe extends StatefulWidget {
 }
 
 class _AboutMeState extends State<AboutMe> {
+  Color _color = Colors.white;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,6 +39,7 @@ class _AboutMeState extends State<AboutMe> {
               ),
             ),
             ElevatedButton(
+
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => LoginPage()));

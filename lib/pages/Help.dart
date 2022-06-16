@@ -2,13 +2,10 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobil_final/AddHelp.dart';
-import 'package:mobil_final/HomePage.dart';
+import 'package:mobil_final/pages/AddHelp.dart';
+import 'package:mobil_final/pages/HomePage.dart';
 
 class HelpPage extends StatefulWidget {
-
-
-
   @override
   State<HelpPage> createState() => _HelpPageState();
 }
@@ -30,8 +27,7 @@ class _HelpPageState extends State<HelpPage> {
           children: [
             StreamBuilder<QuerySnapshot>(
               stream: text1Ref.snapshots(),
-              builder:
-                  (BuildContext context, AsyncSnapshot asyncSnapshot) {
+              builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
                 List<DocumentSnapshot> listOfDocumentSnap =
                     asyncSnapshot.data.docs;
 
@@ -39,19 +35,21 @@ class _HelpPageState extends State<HelpPage> {
                   child: ListView.builder(
                     itemCount: listOfDocumentSnap.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          title: Text('${index + 1}.Yardım İsteği'),
-                          subtitle: Text(
-                            '${listOfDocumentSnap[index].get('name')} - ${listOfDocumentSnap[index].get('text')}',
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () async {
-                              await listOfDocumentSnap[index]
-                                  .reference
-                                  .delete();
-                            },
+                      return SingleChildScrollView(
+                        child: Card(
+                          child: ListTile(
+                            title: Text('${index + 1}.Yardım İsteği'),
+                            subtitle: Text(
+                              '${listOfDocumentSnap[index].get('name')} - ${listOfDocumentSnap[index].get('text')}',
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () async {
+                                await listOfDocumentSnap[index]
+                                    .reference
+                                    .delete();
+                              },
+                            ),
                           ),
                         ),
                       );
@@ -79,8 +77,7 @@ class _HelpPageState extends State<HelpPage> {
                 primary: Colors.grey[700],
                 minimumSize: Size(200, 50),
                 shape: RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(20.0))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
               ),
             ),
             Padding(
@@ -98,16 +95,13 @@ class _HelpPageState extends State<HelpPage> {
                   primary: Colors.grey[700],
                   minimumSize: Size(200, 50),
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(20.0))),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 ),
               ),
             ),
             //Text('sent message:${_yardimTextController.text.value}'),
-
           ],
         ),
-
       ),
     );
   }
