@@ -14,6 +14,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   final TextEditingController _hibeTextController = TextEditingController();
   final TextEditingController _isim2TextController = TextEditingController();
+  final TextEditingController number2TextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     CollectionReference text3Ref = _firestore.collection('addProduct');
@@ -78,18 +79,45 @@ class _AddProductPageState extends State<AddProductPage> {
                             prefixIcon: Icon(Icons.format_align_left)),
                       ),
                       SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: number2TextController,
+                        minLines: 1,
+                        maxLines: 10,
+                        keyboardType: TextInputType.number,
+                        //controller: _passwordController,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10),
+                            labelText: 'Numaranızı Yazınız',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(
+                                color: Colors.orange,
+                                width: 5.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            prefixIcon: Icon(Icons.format_align_left)),
+                      ),
+                      SizedBox(
                         height: 75,
                       ),
                       (_isim2TextController.value.text.isEmpty)?Text("lütfen ürün giriniz",style: TextStyle(fontSize: 24,color: Colors.orange),):   Text("${_isim2TextController.value.text},bağışın eklendi.",style: TextStyle(fontSize: 24,color: Colors.orange),),
                       SizedBox(
-                        height: 75,
+                        height: 50,
                       ),
 
                       ElevatedButton(
                         onPressed: () async {
                           Map<String, dynamic> hibeIstegi = {
                             'name': _isim2TextController.text,
-                            'text': _hibeTextController.text
+                            'text': _hibeTextController.text,
+                            'number': number2TextController.text
                           };
                           await text3Ref
                               .doc(_isim2TextController.text)

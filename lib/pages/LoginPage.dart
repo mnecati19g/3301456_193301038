@@ -52,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 3),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-
                         controller: _emailController,
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -120,20 +119,19 @@ class _LoginPageState extends State<LoginPage> {
                       primary: Colors.grey[700],
                       minimumSize: Size(100, 40),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
                     ),
                   ),
-
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               ElevatedButton(
-                onPressed: (){},
-                onLongPress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AboutMe()));
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutMe()));
                 },
                 child: Text('Hakkımda'),
                 style: ElevatedButton.styleFrom(
@@ -145,10 +143,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SqflitePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SqflitePage()));
                 },
                 child: Text('SSS'),
                 style: ElevatedButton.styleFrom(

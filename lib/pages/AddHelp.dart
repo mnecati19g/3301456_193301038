@@ -14,6 +14,7 @@ class _AddHelpPageState extends State<AddHelpPage> {
   final _firestore = FirebaseFirestore.instance;
   final TextEditingController yardimTextController = TextEditingController();
   final TextEditingController isimTextController = TextEditingController();
+  final TextEditingController numberTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     CollectionReference text1Ref = _firestore.collection('helpRequests');
@@ -115,7 +116,7 @@ class _AddHelpPageState extends State<AddHelpPage> {
                             keyboardType: TextInputType.multiline,
                             //controller: _passwordController,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(50),
+                                contentPadding: EdgeInsets.all(30),
                                 labelText: 'İsminizi Yazınız',
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25.0),
@@ -158,9 +159,45 @@ class _AddHelpPageState extends State<AddHelpPage> {
                                 prefixIcon: Icon(Icons.format_align_left)),
                           ),
                           SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            controller: numberTextController,
+                            minLines: 1,
+                            maxLines: 10,
+                            keyboardType: TextInputType.number,
+                            //controller: _passwordController,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(10),
+                                labelText: 'Numaranızı Yazınız',
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.orange,
+                                    width: 5.0,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      width: 3, color: Colors.white),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                prefixIcon: Icon(Icons.format_align_left)),
+                          ),
+                          SizedBox(
                             height: 75,
                           ),
-                          (isimTextController.value.text.isEmpty)?Text("lütfen istek giriniz",style: TextStyle(fontSize: 24,color: Colors.orange),):   Text("${isimTextController.value.text},isteğin eklendi.",style: TextStyle(fontSize: 24,color: Colors.orange),),
+                          (isimTextController.value.text.isEmpty)
+                              ? Text(
+                                  "lütfen istek giriniz",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.orange),
+                                )
+                              : Text(
+                                  "${isimTextController.value.text},isteğin eklendi.",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.orange),
+                                ),
                           SizedBox(
                             height: 75,
                           ),
@@ -168,7 +205,8 @@ class _AddHelpPageState extends State<AddHelpPage> {
                             onPressed: () async {
                               Map<String, dynamic> kullaniciYardimIstegi = {
                                 'name': isimTextController.text,
-                                'text': yardimTextController.text
+                                'text': yardimTextController.text,
+                                'number': numberTextController.text
                               };
                               /*Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpPage()));*/
                               await text1Ref
@@ -177,7 +215,6 @@ class _AddHelpPageState extends State<AddHelpPage> {
                               setState(() {
                                 isimTextController.notifyListeners();
                               });
-
                             },
                             child: Text(
                               'İstek Ekle',
@@ -188,7 +225,7 @@ class _AddHelpPageState extends State<AddHelpPage> {
                               minimumSize: Size(200, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                                      BorderRadius.all(Radius.circular(20.0))),
                             ),
                           ),
                           SizedBox(
@@ -196,8 +233,10 @@ class _AddHelpPageState extends State<AddHelpPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => HelpPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HelpPage()));
                             },
                             child: Text(
                               'İstekleri görüntüle',
@@ -208,7 +247,7 @@ class _AddHelpPageState extends State<AddHelpPage> {
                               minimumSize: Size(200, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                                      BorderRadius.all(Radius.circular(20.0))),
                             ),
                           ),
                         ],
@@ -233,7 +272,6 @@ class _AddHelpPageState extends State<AddHelpPage> {
                                 BorderRadius.all(Radius.circular(20.0))),
                       ),
                     ),*/
-
                   ],
                 ),
               ),

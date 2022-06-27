@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobil_final/pages/AddProduct.dart';
 import 'package:mobil_final/pages/HomePage.dart';
 
+import 'DonorPage.dart';
+
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
@@ -27,8 +29,7 @@ class _ProductPageState extends State<ProductPage> {
           children: [
             StreamBuilder<QuerySnapshot>(
               stream: text3Ref.snapshots(),
-              builder:
-                  (BuildContext context, AsyncSnapshot asyncSnapshot) {
+              builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
                 List<DocumentSnapshot> listOfDocumentSnap =
                     asyncSnapshot.data.docs;
 
@@ -39,6 +40,12 @@ class _ProductPageState extends State<ProductPage> {
                       return SingleChildScrollView(
                         child: Card(
                           child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DonorPage()));
+                            },
                             title: Text('${index + 1}.Hibe Ürün'),
                             subtitle: Text(
                               '${listOfDocumentSnap[index].get('name')} - ${listOfDocumentSnap[index].get('text')}',
@@ -55,14 +62,12 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       );
 
-                      Text(
-                        '${listOfDocumentSnap[index].get('name')}',
-                      );
+
                     },
                   ),
                 );
 
-                Text('${asyncSnapshot.data.data()}');
+
               },
             ),
             ElevatedButton(
@@ -78,8 +83,7 @@ class _ProductPageState extends State<ProductPage> {
                 primary: Colors.grey[700],
                 minimumSize: Size(200, 50),
                 shape: RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(20.0))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
               ),
             ),
             Padding(
@@ -97,16 +101,13 @@ class _ProductPageState extends State<ProductPage> {
                   primary: Colors.grey[700],
                   minimumSize: Size(200, 50),
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(20.0))),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 ),
               ),
             ),
             //Text('sent message:${_yardimTextController.text.value}'),
-
           ],
         ),
-
       ),
     );
   }

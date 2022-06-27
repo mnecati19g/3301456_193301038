@@ -1,28 +1,29 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobil_final/pages/AddHelp.dart';
-import 'package:mobil_final/pages/ContactNumbersPage.dart';
-import 'package:mobil_final/pages/HomePage.dart';
+import 'package:mobil_final/pages/Help.dart';
 
-class HelpPage extends StatefulWidget {
+import 'HomePage.dart';
+
+class ContactNumbersPage extends StatefulWidget {
+  const ContactNumbersPage({Key? key}) : super(key: key);
+
   @override
-  State<HelpPage> createState() => _HelpPageState();
+  State<ContactNumbersPage> createState() => _ContactNumbersPageState();
 }
 
-class _HelpPageState extends State<HelpPage> {
+class _ContactNumbersPageState extends State<ContactNumbersPage> {
   final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     CollectionReference text1Ref = _firestore.collection('helpRequests');
+
     return MaterialApp(
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Yardım Bekleyenler'),
+          title: Text('Yardım Edebileceğiniz Kişilerin Bilgileri'),
         ),
         body: Column(
           children: [
@@ -36,34 +37,30 @@ class _HelpPageState extends State<HelpPage> {
                   child: ListView.builder(
                     itemCount: listOfDocumentSnap.length,
                     itemBuilder: (context, index) {
-                      return SingleChildScrollView(
-                        child: Card(
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ContactNumbersPage()));
-                            },
-                            title: Text('${index + 1}.Yardım İsteği'),
-                            subtitle: Text(
-                              '${listOfDocumentSnap[index].get('name')} - ${listOfDocumentSnap[index].get('text')}',
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () async {
-                                await listOfDocumentSnap[index]
-                                    .reference
-                                    .delete();
-                              },
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              child: ListTile(
+                                title: Center(
+                                  child: Text(
+                                    '${listOfDocumentSnap[index].get('name')}',
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.orange),
+                                  ),
+                                ),
+                                subtitle: Center(
+                                  child: Text(
+                                    'No : ${listOfDocumentSnap[index].get('number')}',
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.orange),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      );
-
-                      Text(
-                        '${listOfDocumentSnap[index].get('name')}',
+                        ],
                       );
                     },
                   ),
@@ -75,10 +72,10 @@ class _HelpPageState extends State<HelpPage> {
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddHelpPage()));
+                    MaterialPageRoute(builder: (context) => HelpPage()));
               },
               child: Text(
-                'İstek Ekleme Sayfasına Git',
+                'İstekleri görüntüle',
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
