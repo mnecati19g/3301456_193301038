@@ -23,7 +23,7 @@ class _ProductPageState extends State<ProductPage> {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Yardım Bekleyenler'),
+          title: Text('Hibe Ürünler'),
         ),
         body: Column(
           children: [
